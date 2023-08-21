@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+    
+    environment {
+        DIRECTORY_PATH = "/usr/local/opt/jenkins/Jenkinsfile"
+        TESTING_ENVIRONMENT = "dev"
+        PRODUCTION_ENVIRONMENT = "production"
+    }
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetch the source code from ${env.DIRECTORY_PATH}"
+                echo "Compile the code and generate any necessary artifacts"
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Unit tests"
+                echo "Integration tests"
+            }
+        }
+        
+        stage('Code Quality Check') {
+            steps {
+                echo "Check the quality of the code"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo "Deploy the applications to ${env.TESTING_ENVIRONMENT}"
+            }
+        }
+        
+        stage('Approval') {
+            steps {
+                script {
+                    echo "Waiting for manual approval..."
+                    sleep 10
+                }
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to production environemnt ${env.PRODUCTION_ENVIRONMENT}"
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo "Pipeline executed successfully"
+            mail to:"yuhanhb@gmail.com",
+            subject:"Build status Email",
+            body: "Build was successful"
+        }
+        failure {
+            echo "Pipeline failed"
+        }
+    }
+}
