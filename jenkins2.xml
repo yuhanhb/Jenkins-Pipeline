@@ -21,6 +21,7 @@ pipeline {
                     emailext(
                         subject: "Unit and Integration Tests ${currentBuild.result}",
                         body: "Unit and Integration Tests ${currentBuild.result}",
+                        attachLog: true,
                         recipientProviders: [[$class: 'DevelopersRecipientProvider']],
                         attachmentsPattern: '**/target/surefire-reports/*.txt'
                     )
@@ -46,6 +47,7 @@ pipeline {
                     emailext(
                         subject: "Security Scan ${currentBuild.result}",
                         body: "Security Scan ${currentBuild.result}",
+                        attachLog: true,
                         recipientProviders: [[$class: 'DevelopersRecipientProvider']],
                         attachmentsPattern: '**/security-scan-report.txt'
                     )
