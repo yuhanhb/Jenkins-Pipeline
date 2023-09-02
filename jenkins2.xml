@@ -17,14 +17,9 @@ pipeline {
             }
             post {
                 always {
-                    // Send email notification with test results
-                    emailext(
-                        subject: "Unit and Integration Tests ${currentBuild.result}",
-                        body: "Unit and Integration Tests ${currentBuild.result}",
-                        to: 'islandeye123@gmail.com', // Add the recipient's email address
-                        replyTo: 'yuhanhb@gmail.com', // Your email address
-                        attachmentsPattern: '**/target/surefire-reports/*.txt',
-                        mimeType: 'text/plain',
+                    emailext body: 'Test Message',
+                    subject: 'Test Subject',
+                    to: 'yuhanhb@gmail.com'
                     )
                 }
             }
@@ -44,14 +39,9 @@ pipeline {
             }
             post {
                 always {
-                      // Send email notification with security scan results
-                    emailext(
-                        subject: "Security Scan ${currentBuild.result}",
-                        body: "Security Scan ${currentBuild.result}",
-                        to: 'islandeye123@gmail.com', // Add the recipient's email address
-                        replyTo: 'yuhanhb@gmail.com', // Your email address
-                        attachmentsPattern: '**/security-scan-report.txt',
-                        mimeType: 'text/plain',
+                      emailext body: 'Test Message',
+                    subject: 'Test Subject',
+                    to: 'yuhanhb@gmail.com'
                     )
                 }
             }
