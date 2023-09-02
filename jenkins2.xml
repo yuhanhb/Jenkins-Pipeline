@@ -21,9 +21,10 @@ pipeline {
                     emailext(
                         subject: "Unit and Integration Tests ${currentBuild.result}",
                         body: "Unit and Integration Tests ${currentBuild.result}",
-                        attachLog: true,
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                        attachmentsPattern: '**/target/surefire-reports/*.txt'
+                        to: 'recipient@example.com', // Add the recipient's email address
+                        replyTo: 'your.email@example.com', // Your email address
+                        attachmentsPattern: '**/target/surefire-reports/*.txt',
+                        mimeType: 'text/plain',
                     )
                 }
             }
@@ -47,9 +48,10 @@ pipeline {
                     emailext(
                         subject: "Security Scan ${currentBuild.result}",
                         body: "Security Scan ${currentBuild.result}",
-                        attachLog: true,
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                        attachmentsPattern: '**/security-scan-report.txt'
+                        to: 'recipient@example.com', // Add the recipient's email address
+                        replyTo: 'your.email@example.com', // Your email address
+                        attachmentsPattern: '**/security-scan-report.txt',
+                        mimeType: 'text/plain',
                     )
                 }
             }
