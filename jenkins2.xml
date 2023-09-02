@@ -20,7 +20,6 @@ pipeline {
                     emailext body: 'Test Message',
                     subject: 'Test Subject',
                     to: 'yuhanhb@gmail.com'
-                    )
                 }
             }
         }
@@ -42,7 +41,7 @@ pipeline {
                       emailext body: 'Test Message',
                     subject: 'Test Subject',
                     to: 'yuhanhb@gmail.com'
-                    )
+    
                 }
             }
         }
