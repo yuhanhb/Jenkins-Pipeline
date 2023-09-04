@@ -17,25 +17,19 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        subject: "Unit and Integration Tests Successful",
-                        body: "Unit and Integration Tests have passed successfully. Attached are the test logs.",
-                        to: 'yuhanhb@gmail.com',
-                        attachLog: true,
-                        attachmentsPattern: "**/target/surefire-reports/*.txt"
-                    )
-                }
+                        emailext body: "Unit and Integration Tests have passed successfully. Attached are the test logs.", 
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                        [$class: 'RequesterRecipientProvider']], 
+                        subject: "Unit and Integration Tests Successful"
+                    }
                 failure {
-                    emailext(
-                        subject: "Unit and Integration Tests Failed",
-                        body: "Unit and Integration Tests have failed. Attached are the test logs.",
-                        to: 'yuhanhb@gmail.com',
-                        attachLog: true,
-                        attachmentsPattern: "**/target/surefire-reports/*.txt"
-                    )
+                        emailext body: "Unit and Integration Tests have failed. Attached are the test logs.", 
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                        [$class: 'RequesterRecipientProvider']], 
+                        subject: "Unit and Integration Tests Failed"
+                    }
                 }
             }
-        }
 
         stage('Code Analysis') {
             steps {
@@ -51,21 +45,20 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        subject: "Security Scan Successful",
-                        body: "Security Scan has completed successfully.",
-                        to: 'yuhanhb@gmail.com'
-                    )
-                }
+                        emailext body: "Security Scan has completed successfully.", 
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                        [$class: 'RequesterRecipientProvider']], 
+                        subject: "Security Scan Successful"
+                    }
                 failure {
-                    emailext(
-                        subject: "Security Scan Failed",
-                        body: "Security Scan has failed.",
-                        to: 'yuhanhb@gmail.com'
-                    )
+                        emailext body: "Security Scan has failed.", 
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+                        [$class: 'RequesterRecipientProvider']], 
+                        subject: "Security Scan Failed"
                 }
             }
         }
+
 
         stage('Deploy to Staging') {
             steps {
