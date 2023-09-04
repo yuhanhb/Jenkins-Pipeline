@@ -1,12 +1,16 @@
 pipeline {
     agent any
+     
     stages {
-        stage('Send Test Email') {
+        stage('Ok') {
             steps {
-                emailext subject: 'Test Email',
-                    body: 'This is a test email from Jenkins.',
-                    to: 'yuhanhb@gmail.com' 
+                echo "Ok"
             }
+        }
+    }
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }
