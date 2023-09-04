@@ -17,18 +17,18 @@ pipeline {
             }
             post {
                 success {
-                        mail to: 'yuhanhb@gmail.com',
-                        subject: "Unit and Integration Tests Successful",
-                        body: "Unit and Integration Tests have passed successfully. Attached are the test logs.",
-                        attachLog: true,
-                        attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt"
+                    mail to: 'yuhanhb@gmail.com',
+                    subject: "Unit and Integration Tests Successful",
+                    body: "Unit and Integration Tests have passed successfully.",
+                    attachLog: true,
+                    attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt"
                 }
                 failure {
-                        mail to: 'yuhanhb@gmail.com',
-                        subject: "Unit and Integration Tests Failed",
-                        body: "Unit and Integration Tests have failed. Attached are the test logs.",
-                        attachLog: true,
-                        attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt"
+                    mail to: 'yuhanhb@gmail.com',
+                    subject: "Unit and Integration Tests Failed",
+                    body: "Unit and Integration Tests have failed.",
+                    attachLog: true,
+                    attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt"
                 }
             }
         }
@@ -47,14 +47,14 @@ pipeline {
             }
             post {
                 success {
-                        mail to: 'yuhanhb@gmail.com',
-                        subject: "Security Scan Successful",
-                        body: "Security Scan has completed successfully."  
+                    mail to: 'yuhanhb@gmail.com',
+                    subject: "Security Scan Successful",
+                    body: "Security Scan has completed successfully."
                 }
                 failure {
-                        mail to: 'yuhanhb@gmail.com',
-                        subject: "Security Scan Failed",
-                        body: "Security Scan has failed."
+                    mail to: 'yuhanhb@gmail.com',
+                    subject: "Security Scan Failed",
+                    body: "Security Scan has failed."
                 }
             }
         }
