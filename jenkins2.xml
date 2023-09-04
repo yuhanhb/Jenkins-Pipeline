@@ -17,22 +17,18 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
                         subject: "Unit and Integration Tests Successful",
                         body: "Unit and Integration Tests have passed successfully. Attached are the test logs.",
                         mail to: 'yuhanhb@gmail.com',
                         attachLog: true,
                         attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt",
-                    )
                 }
                 failure {
-                    emailext(
                         subject: "Unit and Integration Tests Failed",
                         body: "Unit and Integration Tests have failed. Attached are the test logs.",
                         mail to: 'yuhanhb@gmail.com',
                         attachLog: true,
                         attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt",
-                    )
                 }
             }
         }
@@ -51,18 +47,14 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
                         subject: "Security Scan Successful",
                         body: "Security Scan has completed successfully.",
-                        to: 'yuhanhb@gmail.com',
-                    )
+                        mail to: 'yuhanhb@gmail.com',
                 }
                 failure {
-                    emailext(
                         subject: "Security Scan Failed",
                         body: "Security Scan has failed.",
                         mail to: 'yuhanhb@gmail.com',
-                    )
                 }
             }
         }
