@@ -4,66 +4,87 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                    echo "Fetch the source code from ${env.DIRECTORY_PATH}"
-                    echo "Compile the code and generate any necessary artifacts"
-                    echo "use Maven for automation"
-                }
+                echo "Fetch the source code from ${env.DIRECTORY_PATH}"
+                echo "Compile the code and generate any necessary artifacts"
+                echo "Use Maven for automation"
             }
+        }
 
         stage('Unit and Integration Tests') {
             steps {
-                    echo "Unit tests"
-                    echo "Integration tests"
+                echo "Unit tests"
+                echo "Integration tests"
             }
             post {
                 success {
-                    mail to: "yuhanhb@gmail.com",
-                    subject: "Test Subject",
-                    body: "build"
+                    emailext(
+                        subject: "Unit and Integration Tests Successful",
+                        body: "Unit and Integration Tests have passed successfully. Attached are the test logs.",
+                        mail to: 'yuhanhb@gmail.com',
+                        attachLog: true,
+                        attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt",
+                    )
+                }
+                failure {
+                    emailext(
+                        subject: "Unit and Integration Tests Failed",
+                        body: "Unit and Integration Tests have failed. Attached are the test logs.",
+                        mail to: 'yuhanhb@gmail.com',
+                        attachLog: true,
+                        attachmentsPattern: "${currentBuild.getWorkspace()}/target/surefire-reports/*.txt",
+                    )
                 }
             }
         }
 
         stage('Code Analysis') {
             steps {
-                   echo "Integration tests"
-                   echo "SonarQube Scanner for Jenkins plugin"
+                echo "Integration tests"
+                echo "SonarQube Scanner for Jenkins plugin"
             }
         }
 
         stage('Security Scan') {
             steps {
-                    echo "Perform scan to find vulnerabilities"
-                    echo "OWASP Dependency-Check plugin"
+                echo "Perform scan to find vulnerabilities"
+                echo "OWASP Dependency-Check plugin"
             }
             post {
                 success {
-                    mail to: "yuhanhb@gmail.com",
-                    subject: "Test Subject",
-                    body: "build"
-    
+                    emailext(
+                        subject: "Security Scan Successful",
+                        body: "Security Scan has completed successfully.",
+                        to: 'yuhanhb@gmail.com',
+                    )
+                }
+                failure {
+                    emailext(
+                        subject: "Security Scan Failed",
+                        body: "Security Scan has failed.",
+                        mail to: 'yuhanhb@gmail.com',
+                    )
                 }
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                    echo "Deploy application staging server"
-                    echo "Use tool such as AWS"
+                echo "Deploy application staging server"
+                echo "Use tool such as AWS"
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
-                    echo "run integration test"
-                    echo "Use tool such as JUnit"
+                echo "run integration test"
+                echo "Use tool such as JUnit"
             }
         }
 
         stage('Deploy to Production') {
             steps {
-                    echo "deploy application"
-                    echo "use AWS"
+                echo "deploy application"
+                echo "use AWS"
             }
         }
     }
