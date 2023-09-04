@@ -16,10 +16,10 @@ pipeline {
                     echo "Integration tests"
             }
             post {
-                always {
-                    emailext body: 'Test Message',
-                    subject: 'Test Subject',
-                    to: 'yuhanhb@gmail.com'
+                success {
+                    mail to: "yuhanhb@gmail.com",
+                    subject: "Test Subject",
+                    body: "build"
                 }
             }
         }
@@ -37,10 +37,10 @@ pipeline {
                     echo "OWASP Dependency-Check plugin"
             }
             post {
-                always {
-                      emailext body: 'Test Message',
-                    subject: 'Test Subject',
-                    to: 'yuhanhb@gmail.com'
+                success {
+                    mail to: "yuhanhb@gmail.com",
+                    subject: "Test Subject",
+                    body: "build"
     
                 }
             }
