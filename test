@@ -11,8 +11,7 @@ pipeline {
     post {
         always {
             emailext body: 'A Test EMail', 
-            recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-            [$class: 'RequesterRecipientProvider']], 
+            to: 'yuhanhb@gmail.com',
             subject: 'Test'
         }
     }
