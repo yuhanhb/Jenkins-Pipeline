@@ -14,6 +14,7 @@ pipeline {
             steps {
                 echo "Unit tests"
                 echo "Integration tests"
+                echo "JUnit (Unit Tests) and Postman (Integration Tests)"
             }
             post {
                 success {
