@@ -19,16 +19,14 @@ pipeline {
             post {
                 success {
                         emailext body: "Unit and Integration Tests have passed successfully. Attached are the test logs.", 
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                        [$class: 'RequesterRecipientProvider']], 
+                        to: 'yuhanhb@gmail.com',
                         subject: "Unit and Integration Tests Successful",
                         attachmentsPattern: 'test.log', 
                         attachLog: true 
                     }
                 failure {
                         emailext body: "Unit and Integration Tests have failed. Attached are the test logs.", 
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                        [$class: 'RequesterRecipientProvider']], 
+                        to: 'yuhanhb@gmail.com', 
                         subject: "Unit and Integration Tests Failed",
                         attachmentsPattern: 'test.log', 
                         attachLog: true 
@@ -51,16 +49,14 @@ pipeline {
             post {
                 success {
                         emailext body: "Security Scan has completed successfully.", 
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                        [$class: 'RequesterRecipientProvider']], 
+                        to: 'yuhanhb@gmail.com', 
                         subject: "Security Scan Successful",
                         attachmentsPattern: 'test.log', 
                         attachLog: true 
                     }
                 failure {
                         emailext body: "Security Scan has failed.", 
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-                        [$class: 'RequesterRecipientProvider']], 
+                        to: 'yuhanhb@gmail.com', 
                         subject: "Security Scan Failed",
                         attachmentsPattern: 'test.log', 
                         attachLog: true 
