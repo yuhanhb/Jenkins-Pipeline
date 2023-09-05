@@ -48,7 +48,7 @@ pipeline {
             }
             post {
                 success {
-                        emailext body: "Security Scan has completed successfully.", 
+                        emailext body: "Security Scan has completed successfully.Attached are the test logs", 
                         to: 'yuhanhb@gmail.com', 
                         subject: "Security Scan Successful",
                         attachmentsPattern: 'test.log', 
