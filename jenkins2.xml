@@ -1,4 +1,4 @@
-pipeline {
+pipeline { //edit
     agent any
 
     stages {
